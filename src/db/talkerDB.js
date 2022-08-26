@@ -11,7 +11,7 @@ async function getAll() {
     } catch (err) {
         console.log(err);
     }
-};
+}
 
 module.exports = {
     getAll,
