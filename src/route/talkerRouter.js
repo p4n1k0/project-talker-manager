@@ -1,6 +1,7 @@
 const express = require('express');
 const { getAll } = require('../db/talkerDB');
 const generateToken = require('../utils/generateToken');
+const { validateEmail, validatePassword } = require('../middleware/validateLogin');
 
 const router = express.Router();
 
@@ -22,10 +23,8 @@ router.get('/:id', async (req, res) => {
     res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
 });
 
-router.post('/', async (req, res) => {
-    const { email, password } = req.body;
+router.post('/', validatePassword, validateEmail, (_req, res) => {
     const token = generateToken();
-    console.log(email, password);
 
     res.status(200).json({ token });
   });
