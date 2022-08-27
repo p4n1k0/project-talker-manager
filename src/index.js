@@ -19,3 +19,4 @@ app.listen(PORT, () => {
 });
 
 app.use('/talker', talker);
+app.use('/login', talker);
