@@ -23,10 +23,10 @@ router.get('/:id', async (req, res) => {
     res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
 });
 
-router.post('/', validateEmail, validatePassword, (_req, res) => {    
+router.post('/', validateEmail, validatePassword, (_req, res) => {
     const token = generateToken();
 
     res.status(200).json({ token });
-});
+  });
 
 module.exports = router;
