@@ -1,7 +1,10 @@
 const express = require('express');
-const { getAll } = require('../db/talkerDB');
+const { getAll, insertToken, getTokens } = require('../db/talkerDB');
 const generateToken = require('../utils/generateToken');
 const validation = require('../middleware/validateLogin');
+const validateNameAgeTalker = require('../middleware/validateNameAgeTalker');
+const talkerValidation = require('../middleware/talkerValidation');
+const rateValidation = require('../middleware/rateValidation');
 
 const router = express.Router();
 
@@ -26,7 +29,22 @@ router.get('/:id', async (req, res) => {
 router.post('/', validation, (_req, res) => {
     const token = generateToken();
 
+    insertToken(token);
     res.status(200).json({ token });
+});
+
+router.post('/', validateNameAgeTalker, talkerValidation, rateValidation, async (req, res) => {
+    const { authorization } = req.headers;
+    const talker = res.body;
+    const tokens = await getTokens();
+
+    if (!authorization) {
+        return res.status(401).json({ message: 'Token não encontrado' });
+    }
+    if (!tokens.includes(authorization)) {
+        return res.status(401).json({ message: 'Token inválido' });
+    }
+    res.status(201).json(talker);
 });
 
 module.exports = router;
