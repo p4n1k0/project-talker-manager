@@ -1,6 +1,8 @@
 const express = require('express');
-const { getAll, tokens } = require('../db/talkerDB');
-const validateNameAndAge = require('../middleware/validateNameAndAge');
+const { getAll, insertTalker } = require('../db/talkerDB');
+const validateToken = require('../middleware/validateToken');
+const validateName = require('../middleware/validateName');
+const validateAge = require('../middleware/validateAge');
 const validateTalkerWatchedAt = require('../middleware/validateTalkerWatchedAt');
 const validateRate = require('../middleware/validateRate');
 
@@ -24,20 +26,17 @@ router.get('/:id', async (req, res) => {
     res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
 });
 
-router.post('/', validateNameAndAge, validateTalkerWatchedAt, validateRate, async (req, res) => {
-    const { authorization } = req.headers;
-    const talker = res.body;
-    const data = await tokens();
-  
-    if (!authorization) {
-        return res.status(401).json({ message: 'Token não encontrado' });
-    } 
-  
-    if (!data.includes(authorization)) {
-      return res.status(401).json({ message: 'Token inválido' });
-    }
-  
-    res.status(201).json(talker);
-  });
+router
+    .post('/', validateToken, validateAge, validateName, validateTalkerWatchedAt, validateRate,
+        async (req, res) => {
+            const talker = res.body;
+            const data = await getAll();
+            const newId = Number(data[data.length - 1].id) + 1;
+
+            data.id = newId;
+            await insertTalker(talker);
+
+            res.status(201).json(talker);
+        });
 
 module.exports = router;
