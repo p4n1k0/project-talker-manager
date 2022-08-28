@@ -1,7 +1,5 @@
 const express = require('express');
 const { getAll } = require('../db/talkerDB');
-const generateToken = require('../utils/generateToken');
-const { validatePassword, validateEmail } = require('../middleware/validateLogin');
 
 const router = express.Router();
 
@@ -22,11 +20,5 @@ router.get('/:id', async (req, res) => {
 
     res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
 });
-
-router.post('/', validatePassword, validateEmail, generateToken, (req, res) => {
-    const { token } = req;
-
-    res.status(200).json({ token });
-  });
 
 module.exports = router;
