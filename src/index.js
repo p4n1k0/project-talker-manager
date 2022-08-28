@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const talker = require('./routes/talkerRouter');
-const login = require('./routes/talkerRouter');
+const login = require('./routes/loginRouter');
 
 const app = express();
 app.use(bodyParser.json());

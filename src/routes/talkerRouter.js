@@ -1,8 +1,6 @@
 const express = require('express');
-const { getAll, insertToken, tokens } = require('../db/talkerDB');
-const generateToken = require('../utils/generateToken');
-const validation = require('../middleware/validateLogin');
-const validateNameAndAge = require('../middleware/validateNameAndAnge');
+const { getAll, tokens } = require('../db/talkerDB');
+const validateNameAndAge = require('../middleware/validateNameAndAge');
 const validateTalkerWatchedAt = require('../middleware/validateTalkerWatchedAt');
 const validateRate = require('../middleware/validateRate');
 
@@ -24,13 +22,6 @@ router.get('/:id', async (req, res) => {
     }
 
     res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
-});
-
-router.post('/', validation, (_req, res) => {
-    const token = generateToken();
-
-    insertToken(token);
-    res.status(200).json({ token });
 });
 
 router.post('/', validateNameAndAge, validateTalkerWatchedAt, validateRate, async (req, res) => {
