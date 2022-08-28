@@ -1,10 +1,10 @@
 const express = require('express');
-const { getAll, insertToken, getTokens } = require('../db/talkerDB');
+const { getAll, insertToken, tokens } = require('../db/talkerDB');
 const generateToken = require('../utils/generateToken');
 const validation = require('../middleware/validateLogin');
-const validateNameAgeTalker = require('../middleware/validateNameAgeTalker');
-const talkerValidation = require('../middleware/talkerValidation');
-const rateValidation = require('../middleware/rateValidation');
+const validateNameAndAge = require('../middleware/validateNameAndAnge');
+const validateTalkerWatchedAt = require('../middleware/validateTalkerWatchedAt');
+const validateRate = require('../middleware/validateRate');
 
 const router = express.Router();
 
@@ -33,18 +33,20 @@ router.post('/', validation, (_req, res) => {
     res.status(200).json({ token });
 });
 
-router.post('/', validateNameAgeTalker, talkerValidation, rateValidation, async (req, res) => {
+router.post('/', validateNameAndAge, validateTalkerWatchedAt, validateRate, async (req, res) => {
     const { authorization } = req.headers;
     const talker = res.body;
-    const tokens = await getTokens();
-
+    const data = await tokens();
+  
     if (!authorization) {
         return res.status(401).json({ message: 'Token não encontrado' });
+    } 
+  
+    if (!data.includes(authorization)) {
+      return res.status(401).json({ message: 'Token inválido' });
     }
-    if (!tokens.includes(authorization)) {
-        return res.status(401).json({ message: 'Token inválido' });
-    }
+  
     res.status(201).json(talker);
-});
+  });
 
 module.exports = router;

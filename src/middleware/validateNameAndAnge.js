@@ -1,4 +1,4 @@
-const nameAndAge = (req, res, next) => {
+const validateNameAndAge = (req, res, next) => {
     const { name, age } = req.body;
 
     if (!name) {
@@ -15,4 +15,4 @@ const nameAndAge = (req, res, next) => {
     next();
 };
 
-module.exports = nameAndAge;
+module.exports = validateNameAndAge;

@@ -1,7 +1,7 @@
 const fs = require('fs/promises');
 
 const endpoint = 'src/talker.json';
-const dataToken = 'src.token.json';
+const tokenJSON = 'src/token.json';
 
 async function getAll() {
     try {
@@ -14,31 +14,30 @@ async function getAll() {
     }
 }
 
-// eslint-disable-next-line sonarjs/no-identical-functions
-async function getTokens() {
+async function tokens() {
     try {
-      const data = await fs.readFile(dataToken, 'utf-8');
-      const all = JSON.parse(data);
+        const data = await fs.readFile(tokenJSON, 'utf-8');
+        const all = JSON.parse(data);
 
-      return all;
+        return all;
     } catch (err) {
-      console.log(err);
+        console.log(err);
     }
-  }
+}
 
 async function insertToken(token) {
     try {
-        const data = await getTokens();
+        const data = await tokens();
 
         data.push(token);
-        fs.writeFile(dataToken, JSON.stringify([...data, token]));
+        fs.writeFile(tokenJSON, JSON.stringify([...data, token]));
     } catch (err) {
         console.log(err);
     }
 }
 
 module.exports = {
-    getAll,
-    getTokens,
-    insertToken,
+    getAll, 
+    tokens,
+    insertToken, 
 };
