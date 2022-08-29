@@ -39,13 +39,14 @@ router.put('/:id', validateToken, validateNameAndAge, validateTalk, validateWatc
         const { name, age, talk } = req.body;
         const { id } = req.params;
         const data = await getAll();
-        const talker = data.find((t) => t.id === Number(id));
+        const faker = data.filter((t) => t.id !== Number(id));
+        const talker = data.find((t) => t.id === Number(id));        
 
         talker.name = name;
         talker.age = age;
         talker.talk = talk;
 
-        await updateTalker([...!talker, talker]);
+        await updateTalker([...faker, talker]);
 
         res.status(200).json(talker);
     });
