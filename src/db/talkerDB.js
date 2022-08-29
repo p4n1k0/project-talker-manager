@@ -2,44 +2,44 @@ const fs = require('fs/promises');
 
 const endpoint = 'src/talker.json';
 
-async function getAll() {
+async function getTalkers() {
     try {
         const data = await fs.readFile(endpoint, 'utf-8');
-        const all = JSON.parse(data);
+        const talkers = JSON.parse(data);
 
-        return all;
+        return talkers;
     } catch (err) {
         console.log(err);
     }
 }
 
-async function insertTalker(talker) {
+async function insertTalker(newTalker) {
     try {
-        const data = await getAll();
-        await fs.writeFile(endpoint, JSON.stringify([...data, talker]));
+        const data = await getTalkers();
+        await fs.writeFile(endpoint, JSON.stringify([...data, newTalker]));
     } catch (err) {
         console.log(err);
     } 
 }
 
-async function updateTalker(id) {
+async function updateTalker(talkerId) {
     try {
-        await fs.writeFile(endpoint, JSON.stringify(id));
+        await fs.writeFile(endpoint, JSON.stringify(talkerId));
     } catch (err) {
         console.log(err);
     }
 }
 
-async function deleteTalker(id) {
+async function deleteTalker(talkerId) {
     try {
-        await updateTalker(id);
+        await updateTalker(talkerId);
     } catch (err) {
         console.log(err);
     }
 }
 
 module.exports = {
-    getAll, 
+    getTalkers, 
     insertTalker, 
     updateTalker,
     deleteTalker,
