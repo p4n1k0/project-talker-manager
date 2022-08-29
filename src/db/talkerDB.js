@@ -22,9 +22,17 @@ async function insertTalker(talker) {
     } 
 }
 
-async function updateTalker(talker) {
+async function updateTalker(id) {
     try {
-        await fs.writeFile(endpoint, JSON.stringify(talker));
+        await fs.writeFile(endpoint, JSON.stringify(id));
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function deleteTalker(id) {
+    try {
+        await updateTalker(id);
     } catch (err) {
         console.log(err);
     }
@@ -34,4 +42,5 @@ module.exports = {
     getAll, 
     insertTalker, 
     updateTalker,
+    deleteTalker,
 };

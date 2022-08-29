@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAll, insertTalker, updateTalker } = require('../db/talkerDB');
+const { getAll, insertTalker, updateTalker, deleteTalker } = require('../db/talkerDB');
 const validateToken = require('../middleware/validateToken');
 const validateNameAndAge = require('../middleware/validateNameAndAge');
 const validateWatchedAt = require('../middleware/validateWatchedAt');
@@ -54,14 +54,14 @@ router.put('/:id', validateToken, validateNameAndAge, validateTalk, validateWatc
         res.status(200).json(talker);
     });
 
-router.delete('/:d', validateToken, async (req, res) => {
+    router.delete('/:id', validateToken, async (req, res) => {
     const { id } = req.params;
     const data = await getAll();
     const faker = data.filter((fake) => fake.id !== Number(id));
 
-    await updateTalker(faker);
+    await deleteTalker(faker);
 
-    res.sendStatus(204);
+    res.status(204).end();
 });
 
 module.exports = router;
