@@ -1,8 +1,7 @@
 const express = require('express');
 const { getAll, insertTalker } = require('../db/talkerDB');
 const validateToken = require('../middleware/validateToken');
-const validateName = require('../middleware/validateName');
-const validateAge = require('../middleware/validateAge');
+const validateNameAndAge = require('../middleware/validateNameAndAge');
 const validateWatchedAt = require('../middleware/validateWatchedAt');
 const validateTalk = require('../middleware/validateTalk');
 
@@ -14,17 +13,13 @@ router.get('/', async (_req, res) => {
     res.status(200).json(data);
 });
 
-router.post('/', validateToken, validateAge, validateName, validateTalk, validateWatchedAt,  
+router.post('/', validateToken, validateNameAndAge, validateTalk, validateWatchedAt,  
         async (req, res) => {
-            const talker = res.body;
-            const data = await getAll();
-            const newId = Number(data[data.length - 1].id) + 1;
+            const talker = req.body;
+            const newTalker = { id: 5, ...talker };
+            await insertTalker(newTalker);        
 
-            data.id = newId;
-            talker.id = newId;
-            await insertTalker(talker);
-
-            res.status(201).json(talker);
+            res.status(201).json(newTalker);
         });
 
 router.get('/:id', async (req, res) => {
