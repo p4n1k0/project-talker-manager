@@ -22,7 +22,16 @@ async function insertTalker(talker) {
     } 
 }
 
+async function updateTalker(talker) {
+    try {
+        await fs.writeFile(endpoint, JSON.stringify(talker));
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 module.exports = {
     getAll, 
     insertTalker, 
+    updateTalker,
 };
