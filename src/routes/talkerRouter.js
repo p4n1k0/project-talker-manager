@@ -16,10 +16,13 @@ router.get('/', async (_req, res) => {
 router.post('/', validateToken, validateNameAndAge, validateTalk, validateWatchedAt,
     async (req, res) => {
         const talker = req.body;
-        const newTalker = { id: 5, ...talker };
-        await insertTalker(newTalker);
+        const allTalkers = await getAll();
 
-        res.status(201).json(newTalker);
+        const newId = Number(allTalkers[allTalkers.length - 1].id) + 1;
+        talker.id = newId;
+        await insertTalker(talker);
+
+        res.status(201).json(talker);
     });
 
 router.get('/:id', async (req, res) => {
@@ -39,7 +42,7 @@ router.put('/:id', validateToken, validateNameAndAge, validateTalk, validateWatc
         const { name, age, talk } = req.body;
         const { id } = req.params;
         const data = await getAll();
-        const faker = data.filter((t) => t.id !== Number(id));
+        const faker = data.filter((fake) => fake.id !== Number(id));
         const talker = data.find((t) => t.id === Number(id));        
 
         talker.name = name;
@@ -50,5 +53,15 @@ router.put('/:id', validateToken, validateNameAndAge, validateTalk, validateWatc
 
         res.status(200).json(talker);
     });
+
+router.delete('/:d', validateToken, async (req, res) => {
+    const { id } = req.params;
+    const data = await getAll();
+    const faker = data.filter((fake) => fake.id !== Number(id));
+
+    await updateTalker(faker);
+
+    res.sendStatus(204);
+});
 
 module.exports = router;
