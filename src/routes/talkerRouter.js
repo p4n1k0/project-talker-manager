@@ -41,7 +41,7 @@ router.put('/:id', validateToken, validateNameAndAge, validateTalk, validateWatc
         const { id } = req.params;
         const data = await getTalkers();
         const faker = data.filter((fake) => fake.id !== Number(id));
-        const talker = data.find((t) => t.id === Number(id));        
+        const talker = data.find((t) => t.id === Number(id));
 
         talker.name = name;
         talker.age = age;
@@ -52,7 +52,7 @@ router.put('/:id', validateToken, validateNameAndAge, validateTalk, validateWatc
         res.status(200).json(talker);
     });
 
-    router.delete('/:id', validateToken, async (req, res) => {
+router.delete('/:id', validateToken, async (req, res) => {
     const { id } = req.params;
     const data = await getTalkers();
     const faker = data.filter((fake) => fake.id !== Number(id));
