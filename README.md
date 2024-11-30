@@ -1,16 +1,15 @@
 # Boas-vindas ao repositório do projeto Talker Manager!
 
+Aqui você vai encontrar os detalhes de como foi estruturar o desenvolvimento do projeto a partir deste repositório.
 
-Aqui você vai encontrar os detalhes de como foi estrturado o desenvolvimento do meu projeto a partir deste repositório.
-
-# Desenvolvimento
+# Entregáveis
 
 <details>
   <summary><strong>👨‍💻 O que foi desenvolvido</strong></summary><br />
 
-  Contrução de uma aplicação de cadastro de talkers (palestrantes) em que será possível cadastrar, visualizar, pesquisar, editar e excluir informações. Para isso você foi desenvolvido:
-  1. Uma API de um `CRUD` (**C**reate, **R**ead, **U**pdate e **D**elete) de palestrantes (talkers) e;
-  2. Alguns endpoints que irão ler e escrever em um arquivo utilizando o módulo `fs`.
+  Construção de uma aplicação de cadastro de talkers (palestrantes) em que é possível cadastrar, visualizar, pesquisar, editar e excluir informações. Para isso fui capaz de:
+  1. Desenvolver uma API de um `CRUD` (**C**reate, **R**ead, **U**pdate e **D**elete) de palestrantes (talkers) e;
+  2. Desenvolver alguns endpoints que irão ler e escrever em um arquivo utilizando o módulo `fs`.
 
 </details>
 
@@ -49,28 +48,21 @@ Aqui você vai encontrar os detalhes de como foi estrturado o desenvolvimento do
 </details>
 
 <details>
-  <summary><strong>🕵🏿 Revisando um pull request</strong></summary><br />
+  <summary><strong>‼️ Antes de começar a desenvolver</strong></summary><br />
 
-  Use o conteúdo sobre [Code Review](https://course.betrybe.com/real-life-engineer/code-review/) para te ajudar a revisar os _Pull Requests_.
+  1. Clone o repositório
 
-</details>
+  - `git clone git@github.com:p4n1k0/project-talker-manager.git`.
+  - Entre na pasta do repositório que você acabou de clonar:
+    - `cd project-talker-manager`
 
-<details>
-  <summary><strong>🎛 Linter</strong></summary><br />
-
-  Usaremos o [ESLint](https://eslint.org/) para fazer a análise estática do seu código.
-
-  Este projeto já vem com as dependências relacionadas ao _linter_ configuradas nos arquivos `package.json`.
-
-  Para poder rodar o `ESLint` em um projeto basta executar o comando `npm install` dentro do projeto e depois `npm run lint`. Se a análise do `ESLint` encontrar problemas no seu código, tais problemas serão mostrados no seu terminal. Se não houver problema no código, nada será impresso no seu terminal.
-
-  Você pode também instalar o plugin do `ESLint` no `VSCode`. Para isso, basta fazer o download do [plugin `ESLint`](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) e instalá-lo.
+  
 </details>
 
 <details>
   <summary><strong>🔁 Live reload</strong></summary><br />
 
-  Uso o [Nodemon](https://nodemon.io) para monitorar as mudanças nos arquivos e reiniciar o servidor automaticamente.
+  Usaremos o [Nodemon](https://nodemon.io) para monitorar as mudanças nos arquivos e reiniciar o servidor automaticamente.
 
   Este projeto já vem com as dependências relacionadas ao _nodemon_ configuradas no arquivo `package.json`.
 
@@ -80,7 +72,7 @@ Aqui você vai encontrar os detalhes de como foi estrturado o desenvolvimento do
 <details>
   <summary><strong>🛠 Testes</strong></summary><br />
 
- Foi usado o [Jest](https://jestjs.io/pt-BR/) e o [Frisby](https://docs.frisbyjs.com/) para fazer os testes de API.
+  Usaremos o [Jest](https://jestjs.io/pt-BR/) e o [Frisby](https://docs.frisbyjs.com/) para fazer os testes de API.
 
   Este projeto já vem configurado e com suas dependências
 
@@ -99,6 +91,9 @@ Aqui você vai encontrar os detalhes de como foi estrturado o desenvolvimento do
 
 <details>
   <summary><strong>🗣 Me dê feedbacks sobre o projeto!</strong></summary><br />
+
+
+:warning: **O avaliador automático não necessariamente avalia seu projeto na ordem em que os requisitos aparecem no readme. Isso acontece para deixar o processo de avaliação mais rápido. Então, não se assuste se isso acontecer, ok?**
 
 </details>
 
