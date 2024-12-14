@@ -19,7 +19,7 @@ async function insertTalker(newTalker) {
         await fs.writeFile(endpoint, JSON.stringify([...data, newTalker]));
     } catch (err) {
         console.log(err);
-    } 
+    }
 }
 
 async function updateTalker(talkerId) {
@@ -39,8 +39,8 @@ async function deleteTalker(talkerId) {
 }
 
 module.exports = {
-    getTalkers, 
-    insertTalker, 
+    getTalkers,
+    insertTalker,
     updateTalker,
     deleteTalker,
 };
