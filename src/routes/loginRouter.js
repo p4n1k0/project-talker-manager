@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.post('/', validation, (_req, res) => {
     const token = generateToken();
-
     res.status(200).json({ token });
 });
 

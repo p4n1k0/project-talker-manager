@@ -3,44 +3,27 @@ const fs = require('fs/promises');
 const endpoint = 'src/talker.json';
 
 async function getTalkers() {
-    try {
-        const data = await fs.readFile(endpoint, 'utf-8');
-        const talkers = JSON.parse(data);
-
-        return talkers;
-    } catch (err) {
-        console.log(err);
-    }
-}
+    const data = await fs.readFile(endpoint, 'utf-8');
+    const talkers = JSON.parse(data);
+    return talkers;
+};
 
 async function insertTalker(newTalker) {
-    try {
-        const data = await getTalkers();
-        await fs.writeFile(endpoint, JSON.stringify([...data, newTalker]));
-    } catch (err) {
-        console.log(err);
-    } 
-}
+    const data = await getTalkers();
+    await fs.writeFile(endpoint, JSON.stringify([...data, newTalker]));
+};
 
 async function updateTalker(talkerId) {
-    try {
-        await fs.writeFile(endpoint, JSON.stringify(talkerId));
-    } catch (err) {
-        console.log(err);
-    }
-}
+    await fs.writeFile(endpoint, JSON.stringify(talkerId));
+};
 
 async function deleteTalker(talkerId) {
-    try {
-        await updateTalker(talkerId);
-    } catch (err) {
-        console.log(err);
-    }
-}
+    await updateTalker(talkerId);
+};
 
 module.exports = {
-    getTalkers, 
-    insertTalker, 
+    getTalkers,
+    insertTalker,
     updateTalker,
     deleteTalker,
 };
