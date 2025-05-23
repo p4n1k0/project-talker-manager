@@ -13,6 +13,8 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+__tests__/
+
 # Generated files
 .idea/**/contentModel.xml
 
