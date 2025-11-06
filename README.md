@@ -29,12 +29,6 @@ Aqui você vai encontrar os detalhes de como foi estruturar o desenvolvimento do
 
   > Instale as dependências [**Caso existam**] com `npm install`
 
-  :eyes: **De olho na dica:** 
-
-  A extensão `Remote - Containers` do VS Code (que estará na seção de extensões recomendadas do programa) é indicada para que você possa desenvolver sua aplicação no container Docker direto no VS Code, como você faz com seus arquivos locais.
-
-<img src="images/remote-container.png" width="800px" >
-
   ---
   
   ## Sem Docker
